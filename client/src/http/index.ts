@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 import { AuthResponse } from '../models/response/AuthResponse'
 
