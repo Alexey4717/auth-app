@@ -8,18 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const nodemailer_1 = __importDefault(require("nodemailer"));
+const nodemailer = require('nodemailer');
 class MailService {
     constructor() {
-        this.transporter = nodemailer_1.default.createTransport({
+        this.transporter = nodemailer.createTransport({
             // @ts-ignore
             host: process.env.SMPT_HOST,
             port: process.env.SMPT_PORT,
             secure: false,
+            // service: 'SendPulse',
             auth: {
                 user: process.env.SMPT_USER,
                 pass: process.env.SMPT_PASSWORD, // generated ethereal password

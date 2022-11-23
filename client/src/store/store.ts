@@ -2,13 +2,13 @@ import axios from 'axios';
 import { makeAutoObservable } from 'mobx';
 
 import { IUser } from '../models/IUser';
-import { AuthResponse } from '../models/response/AuthResponse'
+import { AuthResponse } from '../models/response/AuthResponse';
 import AuthService from '../services/AuthService';
 import { API_URL } from '../http/index';
 
 export default class Store {
   user = {} as IUser;
-  isAuth = false;
+  isAuth = null as boolean | null;
   isLoading = false;
 
   constructor() {
@@ -33,7 +33,6 @@ export default class Store {
       localStorage.setItem('token', response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
-      console.log({ response })
     } catch (error: any) {
       console.log(error?.response?.data?.message);
     }
@@ -41,11 +40,7 @@ export default class Store {
 
   async registration(email: string, password: string) {
     try {
-      const response = await AuthService.registration(email, password);
-      localStorage.setItem('token', response.data.accessToken);
-      this.setAuth(true);
-      this.setUser(response.data.user);
-      console.log({ response })
+      return await AuthService.registration(email, password);
     } catch (error: any) {
       console.log(error?.response?.data?.message);
     }
@@ -68,7 +63,6 @@ export default class Store {
       const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
         withCredentials: true
       });
-      console.log(response)
       localStorage.setItem('token', response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);

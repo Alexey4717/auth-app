@@ -1,13 +1,13 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { AuthResponse } from '../models/response/AuthResponse'
+import { AuthResponse } from '../models/response/AuthResponse';
 
-export const API_URL = 'http://localhost:5000/api'
+export const API_URL = 'http://localhost:5000/api';
 
 const $api = axios.create({
   withCredentials: true, // for auto adding cookie to requests
   baseURL: API_URL
-})
+});
 
 $api.interceptors.request.use((config: AxiosRequestConfig) => {
   if (config?.headers) {
@@ -33,6 +33,6 @@ $api.interceptors.response.use(
       }
   }
   throw error;
-})
+});
 
 export default $api;

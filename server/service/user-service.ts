@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import uuid from 'uuid';
+const uuid = require('uuid');
 
 import UserModel from '../models/user-model';
 import mailService from "./mail-service";
@@ -17,7 +17,7 @@ class UserService {
     }
 
     const hashPassword = await bcrypt.hash(password, 7);
-    const activationLink = uuid.v4(); // return random unique string
+    const activationLink = uuid?.v4(); // return random unique string
 
     const user: any = await UserModel.create({
       email,

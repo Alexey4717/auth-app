@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const uuid_1 = __importDefault(require("uuid"));
+const uuid = require('uuid');
 const user_model_1 = __importDefault(require("../models/user-model"));
 const mail_service_1 = __importDefault(require("./mail-service"));
 const token_service_1 = __importDefault(require("./token-service"));
@@ -27,7 +27,7 @@ class UserService {
                 throw api_error_1.default.BadRequest(`User with email ${email} already exists`);
             }
             const hashPassword = yield bcrypt_1.default.hash(password, 7);
-            const activationLink = uuid_1.default.v4(); // return random unique string
+            const activationLink = uuid === null || uuid === void 0 ? void 0 : uuid.v4(); // return random unique string
             const user = yield user_model_1.default.create({
                 email,
                 password: hashPassword,
